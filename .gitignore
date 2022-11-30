@@ -1,0 +1,7 @@
+.DS_Store
+*.class
+__pycache__
+*.exe
+.vscode
+*.out
+*.gch
