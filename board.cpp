@@ -3,6 +3,7 @@
 #include <time.h>
 #include <iterator>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -50,13 +51,16 @@ void board::shuffle(){
     card temp;
     bool in;
     srand(time(NULL));
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 7; j++) {
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (i == 6 && j >= 4) {
+                return;
+            }
             do {
                 temp = all[rand() % 52];
                 in = false;
-                for (int k = 0; k < i; k++) {
-                    for (int l = 0; l < j; l++) {
+                for (int k = 0; k <= i; k++) {
+                    for (int l = 0; l < 8; l++) {
                         if(cascades[k][l].suit == temp.suit && cascades[k][l].num == temp.num){
                             in = true;
                         }
@@ -74,38 +78,46 @@ string board::moveCard(card c, int pos){
 
 ostream& operator<<(ostream &out, const board &b){
     out << endl;
-    out << "Cells | Cascades | Foundations" << endl;
-    out << "------|----------|------------" << endl;
-    out << "      |12345678|" << endl;
-    out << "     " << b.cells[0] << "|";
+    out << right << setw(5)  << "Cells " << "|";
+    out << right << setw(32) << "Cascades            " << "|";
+    out << left  << setw(12) << " Foundations" << "\n";
+    out << right << setw(5)  << "------" << "|";
+    out << right << setw(16) << "--------------------------------" << "|";
+    out << left  << setw(12) << "------------" << "\n";
+    out << right << setw(7)  << "|";
+    out << right << setw(16) << " 1   2   3   4   5   6   7   8  " << "|" << "\n";
+    // out << "Cells | Cascades | Foundations" << endl;
+    // out << "------|----------|------------" << endl;
+    // out << "      | 12345678 |" << endl;
+    out << right << setw(5) << b.cells[0] << "|";
     for (int i = 0; i < 8; i++) {
-        out << b.cascades[0][i];
+        out << " " << b.cascades[0][i] << " ";
     }
-    out << b.foundations[0] << "♦" << endl;
-    out << "     " << b.cells[1] << "|";
+    out << "|♦" << b.foundations[0] << endl;
+    out << right << setw(5) << b.cells[1] << "|";
     for (int i = 0; i < 8; i++) {
-        out << b.cascades[1][i];
+        out << " " << b.cascades[1][i] << " ";
     }
-    out << b.foundations[1] << "♣" << endl;
-    out << "     " << b.cells[2] << "|";
+    out << "|♣" << b.foundations[1] << endl;
+    out << right << setw(5) << b.cells[2] << "|";
     for (int i = 0; i < 8; i++) {
-        out << b.cascades[2][i];
+        out << " " << b.cascades[2][i] << " ";
     }
-    out << b.foundations[2] << "♥" << endl;
-    out << "     " << b.cells[3] << "|";
+    out << "|♥" << b.foundations[2] << endl;
+    out << right << setw(5) << b.cells[3] << "|";
     for (int i = 0; i < 8; i++) {
-        out << b.cascades[3][i];
+        out << " " << b.cascades[3][i] << " ";
     }
-    out << b.foundations[3] << "♠" << endl;
-    out << "      |";
-    for (int i = 0; i < 8; i++) {
-        out << b.cascades[4][i];
-    }
-    out << "|" << endl;
-    for (int j = 5; j < 19; j++) {
+    out << "|♠" << b.foundations[3] << endl;
+    // out << "      |";
+    // for (int i = 0; i < 8; i++) {
+    //     out << " " << b.cascades[4][i];
+    // }
+    // out << "|" << endl;
+    for (int j = 4; j < 19; j++) {
         out << "      |";
         for (int i = 0; i < 8; i++) {
-            out << b.cascades[j][i];
+            out << " " << b.cascades[j][i] << " ";
         }
         out << "|" << endl;
     }

@@ -5,7 +5,8 @@
 
 using namespace std;
 
-enum face {J = 11, Q, K};
+enum face {/*NULL = NULL, */A = 1, J = 11, Q, K};
+enum suit {D,C,H,S};
 
 class card{
 public:
