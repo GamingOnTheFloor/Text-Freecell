@@ -4,11 +4,12 @@
 #include <string>
 #include <iostream>
 #include "card.h"
+#include "freecell.h"
 
 using namespace std;
 
 
-class board{
+class board: Public freecell{
 public:
     board();
     void shuffle();
