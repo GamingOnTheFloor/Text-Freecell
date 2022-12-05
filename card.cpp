@@ -30,16 +30,31 @@ void card::setCard(int n, char s){
 }
 
 ostream& operator<<(ostream &out, const card &c){
+
+    // colors
+    if (c.suit == 'D') {
+        out << "\033[31m"; // \u2666
+    } else if (c.suit == 'C') {
+        out << "\033[90m"; // \u2663
+    } else if (c.suit == 'H'){
+        out << "\033[31m"; // \u2665
+    } else if (c.suit == 'S'){
+        out << "\033[90m"; // \u2660
+    } else {
+        out << ""; // 🂿 \U0001F0BF \u0020
+    }
+
+    // Numbers
     switch (static_cast<face>(c.num)) {
         case K: out << "K"; break;
         case Q: out << "Q"; break;
         case J: out << "J"; break;
-        case 10: out << "0"; break;
+        case 10: out << "\u000810"; break;
         case A: out << "A"; break;
         case NULL: out << "\u0020"; break;
         default: out << c.num;
     }
-    
+
     // if (c.num == 13) {
     //     out << "K";
     // } else if (c.num == 12) {
@@ -62,14 +77,15 @@ ostream& operator<<(ostream &out, const card &c){
     //     default: out << "\u0020"; break; // 🂿 \U0001F0BF \u0020
     // }
 
+    // suit + end colors
     if (c.suit == 'D') {
-        out << "♦"; // \u2666
+        out << "♦\033[m"; // \u2666
     } else if (c.suit == 'C') {
-        out << "♣"; // \u2663
+        out << "♣\033[m"; // \u2663
     } else if (c.suit == 'H'){
-        out << "♥"; // \u2665
+        out << "♥\033[m"; // \u2665
     } else if (c.suit == 'S'){
-        out << "♠"; // \u2660
+        out << "♠\033[m"; // \u2660
     } else {
         out << "\u0020"; // 🂿 \U0001F0BF \u0020
     }
