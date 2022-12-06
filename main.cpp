@@ -14,6 +14,7 @@ int main() {
         user = b.menu();
         cout << user << endl;
     } while(user != "QUIT" && !b.won());
-
+    cout << b << endl;
+    cout << "You won! Good Job!" << endl;
     return 0;
 }

@@ -84,6 +84,9 @@ void board::shuffle(){
 }
 
 string board::moveCard(card c, int pos){
+
+    // Current moveCard() lets you copy cards that aren't there. 4C in foundation reapeared in the Cascades when 4C 5 was prompted.
+
     for (int i = 0; i < 7+12; i++) {
         for (int j = 0; j < 8; j++) {
             if (cascades[i][j].num == c.num && cascades[i][j].suit == c.suit) {
@@ -252,6 +255,9 @@ string board::moveCard(card c, char pos){
 }
 
 string board::menu(){
+
+    // TODO: Lowercase vs. Uppercase shouldn't matter at all EVER. 
+
     string num;
     string place;
     string temp;
@@ -319,6 +325,9 @@ bool board::won(){
 }
 
 ostream& operator<<(ostream &out, const board &b){
+
+    // Current printing of Foundations makes the 10 of anything clip into the line that separates the Cascades and the foundations. (Bug) 10D vs (intended) |10D
+
     out << endl;
     out << right << setw(5)  << "Cells " << "|";
     out << right << setw(32) << "Cascades            " << "|";
@@ -332,7 +341,7 @@ ostream& operator<<(ostream &out, const board &b){
     // out << "------|----------|------------" << endl;
     // out << "      | 12345678 |" << endl;
 
-    // This part of this function could be condensed into another for loop probably. 
+    // This part of this function could be condensed into another for loop probably.
 
     if (b.cells[0].num == 10) {
         out << b.cells[0] << right << setw(4) << "|";
