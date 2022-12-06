@@ -2,16 +2,18 @@
 #include <iostream>
 #include "board.h"
 #include "card.h"
-#include "freecell.h"
 
 using namespace std;
 
 int main() {
     board b;
+    string user;
     b.shuffle();
     do {
-        /* code */
-    } while(user != QUIT);
-    cout << b << endl;
+        cout << b << endl;
+        user = b.menu();
+        cout << user << endl;
+    } while(user != "QUIT" && !b.won());
+
     return 0;
 }
